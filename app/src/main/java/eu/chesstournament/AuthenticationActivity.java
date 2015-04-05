@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -14,6 +15,9 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
+
+import eu.chesstournament.netServices.my.GetTokenFromGoogle;
+import eu.chesstournament.tools.Constants;
 
 
 public class AuthenticationActivity extends ActionBarActivity implements
@@ -104,6 +108,12 @@ public class AuthenticationActivity extends ActionBarActivity implements
 
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
+		//get user email
+		Constants.accountName = Plus.AccountApi.getAccountName(mGoogleApiClient);
+		Log.d("eu.chesstournament", "Account name = " + Constants.accountName);
+
+		GetTokenFromGoogle getTokenFromGoogleTask = new GetTokenFromGoogle();
+		getTokenFromGoogleTask.execute(this);
 	}
 
 	protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
