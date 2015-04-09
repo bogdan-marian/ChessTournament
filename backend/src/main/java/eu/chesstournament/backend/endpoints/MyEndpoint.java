@@ -9,10 +9,14 @@ package eu.chesstournament.backend.endpoints;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.api.server.spi.response.UnauthorizedException;
+import com.google.appengine.api.users.User;
 
 import javax.inject.Named;
 
 import eu.chesstournament.backend.models.MyBean;
+import eu.chesstournament.backend.tools.Constants;
+import eu.chesstournament.backend.tools.MyOauthFlowHelpers;
 
 /**
  * An endpoint class we are exposing
@@ -22,7 +26,11 @@ import eu.chesstournament.backend.models.MyBean;
 		namespace = @ApiNamespace(
 				ownerDomain = "backend.chesstournament.eu",
 				ownerName = "backend.chesstournament.eu",
-				packagePath = ""))
+				packagePath = ""),
+		scopes = {Constants.EMAIL_SCOPE},
+		clientIds = {Constants.WEB_CLIENT_ID, Constants.ANDROID_CLIENT_ID,
+				Constants.API_EXPLORER_CLIENT_ID},
+		audiences = {Constants.ANDROID_AUDIENCE})
 public class MyEndpoint {
 
 	/**
@@ -36,12 +44,28 @@ public class MyEndpoint {
 	}
 
 	@ApiMethod(
-			name = "authenticate",
+			name = "exampleOauth",
 			httpMethod = ApiMethod.HttpMethod.POST)
-	public MyBean authenticate(MyBean myBeanToken){
+	public MyBean exampleOauth(MyBean myBeanToken){
+
 		MyBean myBean = new MyBean();
 		myBean.setData("For the moment there is no answer");
+
+		MyOauthFlowHelpers helper = new MyOauthFlowHelpers();
+		helper.exchangeCodeForTokens("some token");
 		return myBean;
 	}
 
+	@ApiMethod(
+			name="exampleInjectedUser",
+			httpMethod = ApiMethod.HttpMethod.POST
+	)
+	public MyBean exampleInjectedUser(MyBean myBean, final User user)
+			throws UnauthorizedException {
+		if (user == null){
+			throw new UnauthorizedException("Authorization required. No injected user was found");
+		}
+		myBean.setData("user id=" + user.getUserId()+" user email=" + user.getEmail());
+		return myBean;
+	}
 }

@@ -30,7 +30,7 @@ public class SendTokenToServer extends AsyncTask<String, Void, String> {
 		try{
 			MyBean myBean = new MyBean();
 			myBean.setData(params[0]);
-			MyBean returnBean = myApi.authenticate(myBean).execute();
+			MyBean returnBean = myApi.exampleOauth(myBean).execute();
 			Log.d(Constants.LOG_TAG, "End of send");
 			return returnBean.getData();
 		} catch (IOException e) {

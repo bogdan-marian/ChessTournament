@@ -15,7 +15,9 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 
+import eu.chesstournament.netServices.my.GetGeneralResume;
 import eu.chesstournament.netServices.my.GetTokenFromGoogle;
 import eu.chesstournament.tools.Constants;
 
@@ -110,10 +112,16 @@ public class AuthenticationActivity extends ActionBarActivity implements
 
 		//get user email
 		Constants.accountName = Plus.AccountApi.getAccountName(mGoogleApiClient);
-		Log.d("eu.chesstournament", "Account name = " + Constants.accountName);
 
-		GetTokenFromGoogle getTokenFromGoogleTask = new GetTokenFromGoogle();
-		getTokenFromGoogleTask.execute(this);
+		//build credentials
+		Constants.googleAccountCredential =
+				GoogleAccountCredential.usingAudience(this, "server:client_id:"
+						+ Constants.WEB_CLIENT_ID);
+		Constants.googleAccountCredential.setSelectedAccountName(Constants.accountName);
+
+		//connect to landingEndpoint
+		GetGeneralResume getGeneralResume = new GetGeneralResume();
+		getGeneralResume.execute();
 	}
 
 	protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
