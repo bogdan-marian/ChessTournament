@@ -15,7 +15,8 @@
 			<param-name>services</param-name>
 			<param-value>eu.chesstournament.backend.endpoints.MyEndpoint,
 				eu.chesstournament.backend.endpoints.ConnectionEndpoint,
-				eu.chesstournament.backend.endpoints.LandingEndpoint
+				eu.chesstournament.backend.endpoints.LandingEndpoint,
+				eu.chesstournament.backend.endpoints.ClubEndpoint
 			</param-value>
 		</init-param>
 	</servlet>

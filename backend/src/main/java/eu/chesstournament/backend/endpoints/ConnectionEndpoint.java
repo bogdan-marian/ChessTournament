@@ -102,7 +102,7 @@ public class ConnectionEndpoint {
 			path = "connection/{id}",
 			httpMethod = ApiMethod.HttpMethod.PUT)
 	public Connection update(@Named("id") Long id, Connection connection) throws NotFoundException {
-		// TODO: You should validate your ID parameter against your resource's ID here.
+		// You should validate your ID parameter against your resource's ID here.
 		checkExists(id);
 		ofy().save().entity(connection).now();
 		logger.info("Updated Connection: " + connection);

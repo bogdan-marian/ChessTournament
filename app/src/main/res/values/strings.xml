@@ -3,4 +3,6 @@
 
 	<string name="short_welcome">Welcome to Chess Tournament!</string>
 	<string name="action_settings">Settings</string>
+	<string name="title_activity_club">ClubActivity</string>
+	<string name="hello_world">Hello world!</string>
 </resources>

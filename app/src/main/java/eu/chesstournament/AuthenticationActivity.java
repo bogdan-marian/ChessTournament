@@ -120,8 +120,10 @@ public class AuthenticationActivity extends ActionBarActivity implements
 		Constants.googleAccountCredential.setSelectedAccountName(Constants.accountName);
 
 		//connect to landingEndpoint
-		GetGeneralResume getGeneralResume = new GetGeneralResume();
-		getGeneralResume.execute();
+		//GetGeneralResume getGeneralResume = new GetGeneralResume();
+		//getGeneralResume.execute();
+		Intent intent = new Intent(this, ClubActivity.class);
+		startActivity(intent);
 	}
 
 	protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
