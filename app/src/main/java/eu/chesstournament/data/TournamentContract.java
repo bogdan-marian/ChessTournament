@@ -1,5 +1,8 @@
 package eu.chesstournament.data;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -7,10 +10,35 @@ import android.provider.BaseColumns;
  * Created by bogdan on 4/19/2015.
  */
 public class TournamentContract {
+	//content authority and uri
+	public static final String CONTENT_AUTHORITY ="eu.chesstournament";
+	public static final Uri BASE_CONTENT_URI = Uri.parse("content://"+CONTENT_AUTHORITY);
+
+	//paths
+	public static final String PATH_PROFILE = "profile";
+	public static final String PATH_CLUB = "club";
+	public static final String PATH_CLUB_MANAGER = "clubManager";
+	public static final String PATH_CLUB_MEMBER = "clubMember";
+
 	/**
 	 * Inner class that defines the contents of the profile table
 	 */
 	public static final class ProfileEntry implements BaseColumns{
+		//content stuff
+		public static final Uri CONTENT_URI =
+				BASE_CONTENT_URI.buildUpon().appendPath(PATH_PROFILE).build();
+
+		public static final String CONTENT_TYPE =
+				ContentResolver.CURSOR_DIR_BASE_TYPE+"/"+CONTENT_AUTHORITY+"/"+PATH_PROFILE;
+		public static final String CONTENT_ITEM_TYPE =
+				ContentResolver.CURSOR_ITEM_BASE_TYPE+"/"+CONTENT_AUTHORITY+"/"+PATH_PROFILE;
+
+		//build uri
+		public static Uri buildProfileUri(String id){
+			return CONTENT_URI.buildUpon().appendPath(id).build();
+		}
+
+		//table columns
 		public static final String TABLE_NAME = "profile";
 		public static final String COLUMN_ID = "id";
 		public static final String COLUMN_EMAIL = "email";

@@ -55,18 +55,31 @@ public class TournamentDbHelper extends SQLiteOpenHelper {
 				ProfileEntry.TABLE_NAME+ " ("+ ProfileEntry.COLUMN_ID+") "+
 				" FOREIGN KEY ("+ ClubManagerEntry.COLUMN_CLUB_ID +") REFERENCES " +
 				ClubEntry.TABLE_NAME+ " ("+ ClubEntry.COLUMN_ID+") "+
-
 				" );";
-		Log.d(LOG_TAG, SQL_CREATE_PROFILE_TABLE);
-		Log.d(LOG_TAG, SQL_CREATE_CLUB_TABLE);
+
+		final String SQL_CREATE_CLUB_MEMBER_TABLE = "CREATE TABLE " + ClubMemberEntry.TABLE_NAME+" ("+
+				ClubMemberEntry.COLUMN_ID+" INTEGER PRIMARY KEY, "+
+				ClubMemberEntry.COLUMN_PROFILE_ID+" TEXT NOT NULL, "+
+				ClubMemberEntry.COLUMN_CLUB_ID+" INTEGER NOT NULL, "+
+				ClubMemberEntry.COLUMN_DATE+" DATE NOT NULL, "+
+
+				" FOREIGN KEY ("+ ClubMemberEntry.COLUMN_PROFILE_ID +") REFERENCES " +
+				ProfileEntry.TABLE_NAME+ " ("+ ProfileEntry.COLUMN_ID+") "+
+				" FOREIGN KEY ("+ ClubMemberEntry.COLUMN_CLUB_ID +") REFERENCES " +
+				ClubEntry.TABLE_NAME+ " ("+ ClubEntry.COLUMN_ID+") "+
+				" );";
 
 		sqLiteDatabase.execSQL(SQL_CREATE_PROFILE_TABLE);
 		sqLiteDatabase.execSQL(SQL_CREATE_CLUB_TABLE);
 		sqLiteDatabase.execSQL(SQL_CREATE_CLUB_MANAGER_TABLE);
+		sqLiteDatabase.execSQL(SQL_CREATE_CLUB_MEMBER_TABLE);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ClubMemberEntry.TABLE_NAME);
+		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ClubManagerEntry.TABLE_NAME);
+		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ClubEntry.TABLE_NAME);
 		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ProfileEntry.TABLE_NAME);
 	}
 }

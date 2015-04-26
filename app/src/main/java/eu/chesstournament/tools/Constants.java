@@ -2,9 +2,7 @@ package eu.chesstournament.tools;
 
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 
-/**
- * Created by bogdan on 4/6/2015.
- */
+
 public class Constants {
 	//non static
 	public static String accountName = "";

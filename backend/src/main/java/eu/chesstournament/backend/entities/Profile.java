@@ -2,6 +2,7 @@ package eu.chesstournament.backend.entities;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Ignore;
 
 import java.util.Date;
 
@@ -15,6 +16,25 @@ public class Profile {
 	private Date dateOfBirth;
 	private int eloOfficial;
 	private int eloClub;
+	private Long updateStamp;
+	@Ignore
+	private boolean updateSuccessful;
+
+	public Long getUpdateStamp() {
+		return updateStamp;
+	}
+
+	public void setUpdateStamp(Long updateStamp) {
+		this.updateStamp = updateStamp;
+	}
+
+	public boolean isUpdateSuccessful() {
+		return updateSuccessful;
+	}
+
+	public void setUpdateSuccessful(boolean updateSuccessful) {
+		this.updateSuccessful = updateSuccessful;
+	}
 
 	public int getEloOfficial() {
 		return eloOfficial;
