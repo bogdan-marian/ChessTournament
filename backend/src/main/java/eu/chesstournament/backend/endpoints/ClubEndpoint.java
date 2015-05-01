@@ -10,11 +10,13 @@ import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.cmd.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import eu.chesstournament.backend.entities.Club;
 import eu.chesstournament.backend.entities.Profile;
+import eu.chesstournament.backend.models.Country;
 import eu.chesstournament.backend.models.DataPackage1;
 import eu.chesstournament.backend.services.ClubService;
 import eu.chesstournament.backend.services.ProfileService;
@@ -73,6 +75,18 @@ public class ClubEndpoint {
 	public List<Club> listAll(){
 		List<Club> clubs =  ofy().load().type(Club.class).list();
 		return clubs;
+	}
+
+	@ApiMethod(
+			name="getCountries",
+			httpMethod = ApiMethod.HttpMethod.GET
+	)
+	public List<Country> getCountries(final User user) throws UnauthorizedException{
+		if (user == null){
+			throw new UnauthorizedException("Authorization required. No valid user identified");
+		}
+		List<Country> countries = new ArrayList<>();
+		return countries;
 	}
 }
 

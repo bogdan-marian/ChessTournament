@@ -12,9 +12,7 @@ import eu.chesstournament.backend.myApi.MyApi;
 import eu.chesstournament.backend.myApi.model.MyBean;
 import eu.chesstournament.tools.Constants;
 
-/**
- * Created by bogdan on 4/5/2015.
- */
+
 public class SendTokenToServer extends AsyncTask<String, Void, String> {
 	private MyApi myApi = null;
 

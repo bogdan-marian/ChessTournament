@@ -26,7 +26,8 @@
         </activity>
         <activity
             android:name=".ClubActivity"
-            android:label="@string/title_activity_club" >
+            android:label="@string/title_activity_club"
+            android:parentActivityName=".HomeActivity" >
         </activity>
 
         <provider
@@ -36,6 +37,14 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home" >
+        </activity>
+        <activity
+            android:name=".JoinClubActivity"
+            android:label="@string/title_activity_join_club"
+            android:parentActivityName=".ClubActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="eu.chesstournament.ClubActivity" />
         </activity>
     </application>
 

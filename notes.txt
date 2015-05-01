@@ -3,8 +3,15 @@ Flow 1:
 - Verify cache if authenticated on the server side
 - If not then authenticate and modify cache
 - show Home screen
+//Finish working on jon club activity
+Join clubActivity:
+-Select country and town
+	Build a table for country and town.
+	Get them from the server in form
+		list<country> countries
+		country
+			String name
+			list<String> towns
 
-Join club:
-Select country and town
-Display results matching criteria
+-Display results matching criteria
 

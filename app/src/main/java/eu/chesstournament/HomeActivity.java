@@ -1,5 +1,6 @@
 package eu.chesstournament;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -73,8 +74,8 @@ public class HomeActivity extends ActionBarActivity {
 		                         Bundle savedInstanceState) {
 			String[] optionsAray = {
 					"User connected: " + Constants.accountName,
-					"Create club",
-					"Join club"
+					"Clubs",
+					"Something else"
 			};
 			List<String> options = new ArrayList<>(Arrays.asList(optionsAray));
 			mOptionAdapter = new ArrayAdapter<String>(
@@ -105,11 +106,9 @@ public class HomeActivity extends ActionBarActivity {
 			String listText = mOptionAdapter.getItem(position);
 			//
 			switch (listText){
-				case "Create club":
-					Toast.makeText(getActivity(),"Bingo " +listText,Toast.LENGTH_SHORT).show();
-					break;
-				case "Join club":
-					Toast.makeText(getActivity(),"Bingo " +listText,Toast.LENGTH_SHORT).show();
+				case "Clubs"://navigate to ClubActivity
+					Intent clubActivity = new Intent(getActivity(), ClubActivity.class);
+					startActivity(clubActivity);
 					break;
 			}
 		}
