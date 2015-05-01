@@ -28,9 +28,15 @@
             android:name=".ClubActivity"
             android:label="@string/title_activity_club" >
         </activity>
-	    <provider
-		    android:authorities="eu.chesstournament"
-		    android:name=".data.TournamentProvider"/>
+
+        <provider
+            android:name=".data.TournamentProvider"
+            android:authorities="eu.chesstournament" />
+
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home" >
+        </activity>
     </application>
 
 </manifest>

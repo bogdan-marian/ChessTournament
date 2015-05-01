@@ -1,0 +1,10 @@
+Flow 1:
+- Create authentication credentials
+- Verify cache if authenticated on the server side
+- If not then authenticate and modify cache
+- show Home screen
+
+Join club:
+Select country and town
+Display results matching criteria
+

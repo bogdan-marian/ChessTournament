@@ -106,11 +106,8 @@ public class AuthenticationActivity extends ActionBarActivity implements
 		// We've resolved any connection errors.  mGoogleApiClient can be used to
 		// access Google APIs on behalf of the user.
 		Person person = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
-		String message = String.format("Signed in as %s ", person.getDisplayName());
 
-		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-
-		//get user email
+		//set user email
 		Constants.accountName = Plus.AccountApi.getAccountName(mGoogleApiClient);
 
 		//build credentials
@@ -119,11 +116,22 @@ public class AuthenticationActivity extends ActionBarActivity implements
 						+ Constants.WEB_CLIENT_ID);
 		Constants.googleAccountCredential.setSelectedAccountName(Constants.accountName);
 
+
+		String message = String.format("Signed in as %s ", person.getDisplayName());
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+		//TODO create authentication credentials
+		//TODO verify cache if authenticated on the server side
+		//TODO if not then authenticate and modify cache
+		//TODO show home screen
+		Intent intent = new Intent(this, HomeActivity.class);
+		startActivity(intent);
+
 		//connect to landingEndpoint
 		//GetGeneralResume getGeneralResume = new GetGeneralResume();
 		//getGeneralResume.execute();
-		Intent intent = new Intent(this, ClubActivity.class);
-		startActivity(intent);
+		/*Intent intent = new Intent(this, ClubActivity.class);
+		startActivity(intent);*/
+
 	}
 
 	protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
@@ -139,5 +147,4 @@ public class AuthenticationActivity extends ActionBarActivity implements
 	public void onConnectionSuspended(int cause) {
 		mGoogleApiClient.connect();
 	}
-
 }
